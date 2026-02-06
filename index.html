@@ -29,6 +29,16 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* ---------- TYPEWRITER ---------- */
+
+    .typewriter {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  min-height: 2em;
+  white-space: pre-wrap;
+}
+
+
     /* ---------- PARTICLES ---------- */
     .particle {
       position: fixed;
@@ -38,6 +48,7 @@
       border-radius: 50%;
       pointer-events: none;
       animation: floatUp linear infinite;
+      z-index: 1;
     }
 
     @keyframes floatUp {
@@ -57,6 +68,8 @@
       max-width: 900px;
       margin: auto;
       padding: 6rem 2rem;
+      z-index: 2;
+      position: relative;
     }
 
     section {
@@ -130,15 +143,41 @@
       font-size: 0.9rem;
     }
 
+    #constellation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    
+    /* ---------- IMAGES ---------- */
+
+    .image-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .image-row img {
+      width: 100%;
+      flex: 1;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    }
+
+
+
     /* ---------- MOBILE ---------- */
     @media (max-width: 600px) {
       h1 { font-size: 2.3rem; }
       h2 { font-size: 1.6rem; }
+      .image-row { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-
+<canvas id="constellation"></canvas>
   <main>
     <!-- HERO -->
     <section>
@@ -151,23 +190,23 @@
     <!-- MESSAGE CARD -->
     <section>
       <div class="card">
-        <h2>🦀Today I Thought About🦀</h2>
-        <p>
-        Our personal in-jokes. I love laughing about all
+        <h2>🦀 Today I Thought About</h2>
+        <p class="typewriter" data-text="Our personal in-jokes. I love laughing about all
         kinds of things with you. Doing crab fingers (hm), 
         and all of the little things we do to make eachother giggle.
-        I pray we keep that for the rest of our lives.
+        I pray we keep that for the rest of our lives.">
         </p>
+
       </div>
     </section>
 
     <!-- ANOTHER MOMENT -->
     <section>
       <div class="card">
-        <h2>🌙 Goodnight my da</h2>
+        <h2>🥹 Will You?</h2>
         <p>
-          You could talk about a memory, a feeling,
-          or why this person matters to you.
+          Let me be yours and you be mine. Make me smile and be my ... Valentine?
+          This is a public site tho, ew!
         </p>
       </div>
     </section>
@@ -176,9 +215,20 @@
     <section class="heart-container">
       <div class="heart" id="heart">❤️</div>
       <div class="secret" id="secret">
-          HM! I ler shu
+          HM! You found the secret. I ler shu!
       </div>
     </section>
+
+    <section>
+  <h2 style="text-align:center;">Our Story ✨</h2>
+
+  <div class="image-row">
+  <img src="images/adam_gyo_sessy.jpeg" alt="Memory one">
+  <img src="images/adam_bop.jpeg" alt="Memory two">
+  <img src="images/bop_sessy.jpeg" alt="Memory three">
+</div>
+</section>
+
 
     <footer>
       Try to click the heart my bbg 💖
@@ -224,7 +274,88 @@
       heart.textContent = '💖';
       secret.classList.add('revealed');
     });
+  function typeWriter(element, speed = 50) {
+    const text = element.dataset.text;
+    let index = 0;
+
+    function type() {
+      if (index < text.length) {
+        element.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, speed);
+      }
+    }
+    type();
+  }
+
+  document.querySelectorAll('.typewriter').forEach(el => {
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        typeWriter(el);
+        observer.disconnect();
+      }
+    }, { threshold: 0.6 });
+
+    observer.observe(el);
+  });
+
   </script>
+  <script>
+  const canvas = document.getElementById('constellation');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const stars = Array.from({ length: 80 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3
+  }));
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    stars.forEach(s => {
+      s.x += s.vx;
+      s.y += s.vy;
+
+      if (s.x < 0 || s.x > canvas.width) s.vx *= -1;
+      if (s.y < 0 || s.y > canvas.height) s.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.fill();
+    });
+
+    for (let i = 0; i < stars.length; i++) {
+      for (let j = i + 1; j < stars.length; j++) {
+        const dx = stars[i].x - stars[j].x;
+        const dy = stars[i].y - stars[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          ctx.strokeStyle = `rgba(255,255,255,${1 - dist / 120})`;
+          ctx.beginPath();
+          ctx.moveTo(stars[i].x, stars[i].y);
+          ctx.lineTo(stars[j].x, stars[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
 
 </body>
 </html>
