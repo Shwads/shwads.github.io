@@ -1,1 +1,232 @@
-<h1>Hello World!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Surprise 💖</title>
+
+  <style>
+    /* ---------- RESET ---------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      color: #ffffff;
+      overflow-x: hidden;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ---------- PARTICLES ---------- */
+    .particle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+      }
+      10% { opacity: 0.6; }
+      to {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- LAYOUT ---------- */
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 6rem 2rem;
+    }
+
+    section {
+      margin-bottom: 6rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      opacity: 0.95;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- INTERACTIVE HEART ---------- */
+    .heart-container {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .heart {
+      font-size: 4rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .heart:hover {
+      transform: scale(1.2);
+    }
+
+    .secret {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .secret.revealed {
+      opacity: 1;
+    }
+
+    footer {
+      text-align: center;
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 600px) {
+      h1 { font-size: 2.3rem; }
+      h2 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <!-- HERO -->
+    <section>
+      <h1>✨ Your Title Goes Here ✨</h1>
+      <p style="text-align:center;">
+        This is where your opening message goes.  
+        Say something sweet, mysterious, or dramatic.
+      </p>
+    </section>
+
+    <!-- MESSAGE CARD -->
+    <section>
+      <div class="card">
+        <h2>💌 A Section for Words</h2>
+        <p>
+          This is a perfect place for a longer message.  
+          Write from the heart. Be cheesy. Be real.  
+          You can add multiple paragraphs if you want.
+        </p>
+      </div>
+    </section>
+
+    <!-- ANOTHER MOMENT -->
+    <section>
+      <div class="card">
+        <h2>🌙 Another Memory / Thought</h2>
+        <p>
+          You could talk about a memory, a feeling,
+          or why this person matters to you.
+        </p>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SURPRISE -->
+    <section class="heart-container">
+      <div class="heart" id="heart">❤️</div>
+      <div class="secret" id="secret">
+        This text appears after they click the heart.  
+        Put something *extra special* here.
+      </div>
+    </section>
+
+    <footer>
+      Made with love 💖
+    </footer>
+  </main>
+
+  <script>
+    /* ---------- PARTICLE GENERATOR ---------- */
+    const particleCount = 25;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+
+      const size = Math.random() * 6 + 4;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = (10 + Math.random() * 20) + 's';
+      particle.style.animationDelay = Math.random() * 20 + 's';
+
+      document.body.appendChild(particle);
+    }
+
+    /* ---------- SCROLL REVEAL ---------- */
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => observer.observe(section));
+
+    /* ---------- HEART CLICK ---------- */
+    const heart = document.getElementById('heart');
+    const secret = document.getElementById('secret');
+
+    heart.addEventListener('click', () => {
+      heart.textContent = '💖';
+      secret.classList.add('revealed');
+    });
+  </script>
+
+</body>
+</html>
+
