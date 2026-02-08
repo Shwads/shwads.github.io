@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💖Bop💖</title>
+  <title>💖 Bop The Beautiful 💖</title>
 
   <style>
     /* ---------- RESET ---------- */
@@ -190,41 +190,23 @@
     <!-- MESSAGE CARD -->
     <section>
       <div class="card">
-        <h2>🪿 Today I Thought About</h2>
-        <p class="typewriter" data-text="Our nicknames. I love seeing cute things
-        and then using it as a nickname for you and when you do it for me. I love
-        seeing a thing and attaching some association with you. Never in my life have
-        I felt such joy at seeing a goose or a pufferfish or a scallop or an octopus.
-        The language we develop together enriches my world and brings me more and more
-        joy the more we grow it together. I love it so much Alhamdulillah.">
-        </p>
+        <h2>😗 Today I Thought About</h2>
+        <!--<p class="typewriter" data-text="I had a wonderful time watching things with you this weekend. I've loved chatting about the things we've watched and expressing my feelings to you while watching and having you express yours. I cannot stress how much I love your commentary on the shows that we watch together. It increases my enjoyment immeasurably and I think of the things you say long after we've stopped watching. Thank you for being so wonderful.">
+        </p>-->
+        <p>I had a wonderful time watching things with you this weekend. I've loved chatting about the things we've watched and expressing my feelings to you while watching and having you express yours. I cannot stress how much I love your commentary on the shows that we watch together. It increases my enjoyment immeasurably and I think of the things you say long after we've stopped watching. Thank you for being so wonderful.</p>
 
       </div>
     </section>
 
     <!-- ANOTHER MOMENT -->
-    <section>
-      <div class="card">
-        <h2>🤡 My First Joke</h2>
-        <p>
-            The first joke I ever told went like this:
-            "knock knock"
-            "who's there?"
-            "bear"
-            "bear who?"
-            "bare bum"
-        </p>
-      </div>
-    </section>
 
     <!-- WILL YOU THOUGH??? -->
 
     <section>
       <div class="card">
-        <h2>🥺 So Will you Though???</h2>
+        <h2>🥺 So Will you Though??? Like For Real????</h2>
         <p>
-            So yesterday I asked if you'd be my Valentine. Now 
-            that you've had some time to think about it, will you?
+        Day 3 of asking my girl to be my Valentine. When will my waiting come to an end 😩
         </p>
       </div>
     </section>
@@ -233,8 +215,7 @@
     <section class="heart-container">
       <div class="heart" id="heart">❤️</div>
       <div class="secret" id="secret">
-          Wow, testing things to see what's different cu cut!
-          Good job darling you were right I did change things hm.
+          Look at you darling. Touching my heart every day just as you've done since the day we met.
       </div>
     </section>
 
@@ -250,7 +231,7 @@
 
 
     <footer>
-      Try to click the heart my bbg 💖
+        munchie munching since day 1 🥰
     </footer>
   </main>
 
@@ -319,7 +300,7 @@
   });
 
   </script>
-  <script>
+  <!--<script>
   const canvas = document.getElementById('constellation');
   const ctx = canvas.getContext('2d');
 
@@ -373,7 +354,41 @@
   }
 
   animate();
-</script>
+  </script>-->
+  <script>
+    const canvas = document.getElementById('constellation');
+    const ctx = canvas.getContext('2d');
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+    resize();
+
+    const hearts = Array.from({ length: 30 }, () => ({
+        x: Math.random() * canvas.width,
+        y: canvas.height + Math.random() * canvas.height,
+        speed: 0.3 + Math.random(),
+        size: 6 + Math.random() * 6
+    }));
+
+    function animateHearts() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        hearts.forEach(h => {
+            h.y -= h.speed;
+            if (h.y < -20) h.y = canvas.height + 20;
+
+            ctx.font = `${h.size+2}px serif`;
+            ctx.fillText('🪿🔪', h.x, h.y);
+        });
+
+        requestAnimationFrame(animateHearts);
+    }
+
+    animateHearts();
+
+  </script>
 
 
 </body>
