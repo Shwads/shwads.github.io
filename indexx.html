@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💖 Bop The Beautiful 💖</title>
+
+  <style>
+    /* ---------- RESET ---------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      color: #ffffff;
+      overflow-x: hidden;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ---------- TYPEWRITER ---------- */
+
+    .typewriter {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  min-height: 2em;
+  white-space: pre-wrap;
+}
+
+
+    /* ---------- PARTICLES ---------- */
+    .particle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: floatUp linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+      }
+      10% { opacity: 0.6; }
+      to {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- LAYOUT ---------- */
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 6rem 2rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    section {
+      margin-bottom: 6rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      opacity: 0.95;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- INTERACTIVE HEART ---------- */
+    .heart-container {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .heart {
+      font-size: 4rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .heart:hover {
+      transform: scale(1.2);
+    }
+
+    .secret {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .secret.revealed {
+      opacity: 1;
+    }
+
+    footer {
+      text-align: center;
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    #constellation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    
+    /* ---------- IMAGES ---------- */
+
+    .image-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .image-row img {
+      width: 100%;
+      flex: 1;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    }
+
+
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 600px) {
+      h1 { font-size: 2.3rem; }
+      h2 { font-size: 1.6rem; }
+      .image-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="constellation"></canvas>
+  <main>
+    <!-- HERO -->
+    <section>
+      <h1>✨ To The Love of My Life ✨</h1>
+      <p style="text-align:center;">
+        Good morning my love x
+      </p>
+    </section>
+
+    <!-- MESSAGE CARD -->
+    <section>
+      <div class="card">
+        <h2>🐈 Today I Thought About</h2>
+        <!--<p class="typewriter" data-text="I had a wonderful time watching things with you this weekend. I've loved chatting about the things we've watched and expressing my feelings to you while watching and having you express yours. I cannot stress how much I love your commentary on the shows that we watch together. It increases my enjoyment immeasurably and I think of the things you say long after we've stopped watching. Thank you for being so wonderful.">
+        </p>-->
+        <p>You meeting my parents. Us coming home together and spending time with my family and spending time together as we grow old inshallah. It made me feel really happy.</p>
+      </div>
+    </section>
+
+    <!-- ANOTHER MOMENT -->
+
+    <!-- WILL YOU THOUGH??? -->
+
+    <section>
+      <div class="card">
+        <h2>You Really...</h2>
+  <img src="images/orangutan.jpg" alt="orangutan" style="max-width:100%; height:auto;">
+  <p>See me looking like this and think: "wow, so handsome"</p>
+      <!-- <a href="https://www.youtube.com/watch?v=qB5Lttr53Vk"
+   target="_blank"
+   style="
+     display: block;
+     text-align: center;
+     padding: 2.5rem;
+     border-radius: 16px;
+     background: rgba(255,255,255,0.2);
+     color: white;
+     text-decoration: none;
+     font-size: 1.2rem;
+   ">
+  You bring this energy a lot and I love you so much for it (Click Me)
+      </a> -->
+    </section>
+
+    <!-- INTERACTIVE SURPRISE -->
+    <section class="heart-container">
+      <div class="heart" id="heart">❤️</div>
+      <div class="secret" id="secret">
+          I am so in love with you.
+      </div>
+    </section>
+
+    <section>
+  <h2 style="text-align:center;">Our Story ✨</h2>
+
+  <div class="image-row">
+  <img src="images/img_1.jpeg" alt="Memory one">
+  <img src="images/img_2.jpeg" alt="Memory two">
+  <img src="images/img_3.jpeg" alt="Memory three">
+</div>
+</section>
+
+
+    <footer>
+        The pictures I take without you noticing are my favourites 🥰 (in a non creepy way)
+    </footer>
+  </main>
+
+  <script>
+    /* ---------- PARTICLE GENERATOR ---------- */
+    const particleCount = 25;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+
+      const size = Math.random() * 6 + 4;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = (10 + Math.random() * 20) + 's';
+      particle.style.animationDelay = Math.random() * 20 + 's';
+
+      document.body.appendChild(particle);
+    }
+
+    /* ---------- SCROLL REVEAL ---------- */
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => observer.observe(section));
+
+    /* ---------- HEART CLICK ---------- */
+    const heart = document.getElementById('heart');
+    const secret = document.getElementById('secret');
+
+    heart.addEventListener('click', () => {
+      heart.textContent = '🐙';
+      secret.classList.add('revealed');
+    });
+  function typeWriter(element, speed = 50) {
+    const text = element.dataset.text;
+    let index = 0;
+
+    function type() {
+      if (index < text.length) {
+        element.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, speed);
+      }
+    }
+    type();
+  }
+
+  document.querySelectorAll('.typewriter').forEach(el => {
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        typeWriter(el);
+        observer.disconnect();
+      }
+    }, { threshold: 0.6 });
+
+    observer.observe(el);
+  });
+
+  </script>
+  <!--<script>
+  const canvas = document.getElementById('constellation');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const stars = Array.from({ length: 80 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3
+  }));
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    stars.forEach(s => {
+      s.x += s.vx;
+      s.y += s.vy;
+
+      if (s.x < 0 || s.x > canvas.width) s.vx *= -1;
+      if (s.y < 0 || s.y > canvas.height) s.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.fill();
+    });
+
+    for (let i = 0; i < stars.length; i++) {
+      for (let j = i + 1; j < stars.length; j++) {
+        const dx = stars[i].x - stars[j].x;
+        const dy = stars[i].y - stars[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          ctx.strokeStyle = `rgba(255,255,255,${1 - dist / 120})`;
+          ctx.beginPath();
+          ctx.moveTo(stars[i].x, stars[i].y);
+          ctx.lineTo(stars[j].x, stars[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+  </script>-->
+  <script>
+    const canvas = document.getElementById('constellation');
+    const ctx = canvas.getContext('2d');
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+    resize();
+
+    const hearts = Array.from({ length: 30 }, () => ({
+        x: Math.random() * canvas.width,
+        y: canvas.height + Math.random() * canvas.height,
+        speed: 0.3 + Math.random(),
+        size: 6 + Math.random() * 6
+    }));
+
+    function animateHearts() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        hearts.forEach(h => {
+            h.y -= h.speed;
+            if (h.y < -20) h.y = canvas.height + 20;
+
+            ctx.font = `${h.size+2}px serif`;
+            ctx.fillText('💕', h.x, h.y);
+        });
+
+        requestAnimationFrame(animateHearts);
+    }
+
+    animateHearts();
+
+  </script>
+
+
+</body>
+</html>
+

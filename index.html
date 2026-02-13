@@ -1,407 +1,703 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💖 Bop The Beautiful 💖</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap');
 
-  <style>
-    /* ---------- RESET ---------- */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      min-height: 100vh;
-      color: #ffffff;
-      overflow-x: hidden;
-      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-      background-size: 400% 400%;
-      animation: gradientShift 20s ease infinite;
-    }
+        body {
+            font-family: 'Courier Prime', 'Courier New', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #f4f1ea;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 69, 69, 0.03) 2px, rgba(139, 69, 69, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 69, 69, 0.03) 2px, rgba(139, 69, 69, 0.03) 4px);
+            position: relative;
+            color: #2c2c2c;
+        }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* Paper texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 69, 69, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(160, 82, 82, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(139, 69, 69, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
 
-    /* ---------- TYPEWRITER ---------- */
+        /* Vignette effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(139, 69, 69, 0.08) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
 
-    .typewriter {
-  font-size: 1.3rem;
-  line-height: 1.7;
-  min-height: 2em;
-  white-space: pre-wrap;
-}
+        /* Main content container */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            text-align: center;
+        }
 
+        h1 {
+            font-family: 'Special Elite', 'Courier New', monospace;
+            font-size: 2.5em;
+            color: #8b4513;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            min-height: 1.2em;
+            position: relative;
+            display: inline-block;
+        }
 
-    /* ---------- PARTICLES ---------- */
-    .particle {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: floatUp linear infinite;
-      z-index: 1;
-    }
+        /* Cursor blink */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.1em;
+            background: #8b4513;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+        }
 
-    @keyframes floatUp {
-      from {
-        transform: translateY(100vh) scale(0.8);
-        opacity: 0;
-      }
-      10% { opacity: 0.6; }
-      to {
-        transform: translateY(-10vh) scale(1.2);
-        opacity: 0;
-      }
-    }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
 
-    /* ---------- LAYOUT ---------- */
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 6rem 2rem;
-      z-index: 2;
-      position: relative;
-    }
+        /* Flower garden */
+        .garden {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+            min-height: 220px;
+            align-items: flex-end;
+        }
 
-    section {
-      margin-bottom: 6rem;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
+        .flower {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
 
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+        .flower:hover {
+            transform: translateY(-5px);
+        }
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
+        /* Common stem and leaf styles */
+        .stem {
+            position: absolute;
+            width: 3px;
+            background: #4a5d23;
+            bottom: 0;
+            transform-origin: bottom;
+            transform: scaleY(0);
+        }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+        .leaf {
+            position: absolute;
+            background: #5c6b2f;
+            opacity: 0;
+        }
 
-    p {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      opacity: 0.95;
-    }
+        /* FLOWER 1: Classic Daisy - Blooms in ring */
+        .flower-1 {
+            width: 100px;
+            height: 160px;
+        }
 
-    .card {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    }
+        .flower-1 .stem { height: 70px; left: 48px; animation: growStem 1s ease-out forwards; }
+        
+        .flower-1 .center {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #daa520;
+            border-radius: 50%;
+            top: 45px;
+            left: 51px;
+            z-index: 5;
+            opacity: 0;
+            animation: popIn 0.3s ease-out 1s forwards;
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2);
+        }
 
-    /* ---------- INTERACTIVE HEART ---------- */
-    .heart-container {
-      text-align: center;
-      margin-top: 3rem;
-    }
+        .flower-1 .petal {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: #ffb7c5;
+            border-radius: 50% 50% 50% 0;
+            top: 25px;
+            left: 32px;
+            transform-origin: bottom right;
+            opacity: 0;
+            transform: scale(0) rotate(-45deg);
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
 
-    .heart {
-      font-size: 4rem;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      display: inline-block;
-    }
+        .flower-1 .petal:nth-child(1) { animation: bloomRing 0.6s ease-out 0.2s forwards; }
+        .flower-1 .petal:nth-child(2) { animation: bloomRing 0.6s ease-out 0.4s forwards; --rotation: 72deg; }
+        .flower-1 .petal:nth-child(3) { animation: bloomRing 0.6s ease-out 0.6s forwards; --rotation: 144deg; }
+        .flower-1 .petal:nth-child(4) { animation: bloomRing 0.6s ease-out 0.8s forwards; --rotation: 216deg; }
+        .flower-1 .petal:nth-child(5) { animation: bloomRing 0.6s ease-out 1.0s forwards; --rotation: 288deg; }
 
-    .heart:hover {
-      transform: scale(1.2);
-    }
+        @keyframes bloomRing {
+            0% { opacity: 0; transform: scale(0) rotate(-45deg); }
+            100% { opacity: 1; transform: scale(1) rotate(calc(-45deg + var(--rotation, 0deg))); }
+        }
 
-    .secret {
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
+        .flower-1 .leaf {
+            width: 18px;
+            height: 18px;
+            border-radius: 0 50% 0 50%;
+            bottom: 25px;
+        }
+        .flower-1 .leaf.left { left: 30px; transform: rotate(-45deg); animation: growLeaf 0.5s ease-out 1.2s forwards; }
+        .flower-1 .leaf.right { right: 30px; transform: rotate(135deg); animation: growLeaf 0.5s ease-out 1.4s forwards; }
 
-    .secret.revealed {
-      opacity: 1;
-    }
+        /* FLOWER 2: Tulip - Blooms upward unfolding */
+        .flower-2 {
+            width: 90px;
+            height: 150px;
+        }
 
-    footer {
-      text-align: center;
-      opacity: 0.7;
-      font-size: 0.9rem;
-    }
+        .flower-2 .stem { height: 60px; left: 43px; animation: growStem 1s ease-out 0.3s forwards; }
 
-    #constellation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-    
-    /* ---------- IMAGES ---------- */
+        .flower-2 .petal {
+            position: absolute;
+            bottom: 60px;
+            background: #c71585;
+            transform-origin: bottom center;
+            opacity: 0;
+        }
 
-    .image-row {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
+        /* Tulip petals unfold upward */
+        .flower-2 .petal:nth-child(1) {
+            width: 40px;
+            height: 50px;
+            left: 25px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: unfoldUp 0.8s ease-out 1.3s forwards;
+            z-index: 3;
+        }
 
-    .image-row img {
-      width: 100%;
-      flex: 1;
-      border-radius: 16px;
-      object-fit: cover;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-    }
+        .flower-2 .petal:nth-child(2) {
+            width: 35px;
+            height: 45px;
+            left: 15px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            background: #db7093;
+            animation: unfoldUp 0.8s ease-out 1.5s forwards;
+            z-index: 2;
+        }
 
+        .flower-2 .petal:nth-child(3) {
+            width: 35px;
+            height: 45px;
+            right: 15px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            background: #db7093;
+            animation: unfoldUp 0.8s ease-out 1.7s forwards;
+            z-index: 2;
+        }
 
+        @keyframes unfoldUp {
+            0% { opacity: 0; transform: scaleY(0) scaleX(0.5); }
+            100% { opacity: 1; transform: scaleY(1) scaleX(1); }
+        }
 
-    /* ---------- MOBILE ---------- */
-    @media (max-width: 600px) {
-      h1 { font-size: 2.3rem; }
-      h2 { font-size: 1.6rem; }
-      .image-row { flex-direction: column; }
-    }
-  </style>
+        .flower-2 .leaf {
+            width: 25px;
+            height: 15px;
+            background: #556b2f;
+            border-radius: 50% 0 50% 0;
+            bottom: 20px;
+        }
+        .flower-2 .leaf.left { left: 20px; transform: rotate(-30deg); animation: growLeaf 0.5s ease-out 1.9s forwards; }
+        .flower-2 .leaf.right { right: 20px; transform: rotate(150deg); animation: growLeaf 0.5s ease-out 2.0s forwards; }
+
+        /* FLOWER 3: Sunflower - Blooms outward spiral */
+        .flower-3 {
+            width: 110px;
+            height: 170px;
+        }
+
+        .flower-3 .stem { height: 75px; left: 53px; animation: growStem 1s ease-out 0.6s forwards; }
+
+        .flower-3 .center {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: #8b4513;
+            border-radius: 50%;
+            top: 60px;
+            left: 35px;
+            z-index: 10;
+            opacity: 0;
+            animation: popIn 0.4s ease-out 2.2s forwards;
+            box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3);
+        }
+
+        .flower-3 .petal {
+            position: absolute;
+            width: 20px;
+            height: 45px;
+            background: #ffd700;
+            border-radius: 50% 50% 50% 50%;
+            top: 30px;
+            left: 42px;
+            transform-origin: center bottom;
+            opacity: 0;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+        }
+
+        /* Spiral bloom pattern */
+        .flower-3 .petal:nth-child(1) { animation: spiralBloom 0.5s ease-out 1.6s forwards; }
+        .flower-3 .petal:nth-child(2) { animation: spiralBloom 0.5s ease-out 1.7s forwards; --angle: 30deg; }
+        .flower-3 .petal:nth-child(3) { animation: spiralBloom 0.5s ease-out 1.8s forwards; --angle: 60deg; }
+        .flower-3 .petal:nth-child(4) { animation: spiralBloom 0.5s ease-out 1.9s forwards; --angle: 90deg; }
+        .flower-3 .petal:nth-child(5) { animation: spiralBloom 0.5s ease-out 2.0s forwards; --angle: 120deg; }
+        .flower-3 .petal:nth-child(6) { animation: spiralBloom 0.5s ease-out 2.1s forwards; --angle: 150deg; }
+        .flower-3 .petal:nth-child(7) { animation: spiralBloom 0.5s ease-out 2.2s forwards; --angle: 180deg; }
+        .flower-3 .petal:nth-child(8) { animation: spiralBloom 0.5s ease-out 2.3s forwards; --angle: 210deg; }
+        .flower-3 .petal:nth-child(9) { animation: spiralBloom 0.5s ease-out 2.4s forwards; --angle: 240deg; }
+        .flower-3 .petal:nth-child(10) { animation: spiralBloom 0.5s ease-out 2.5s forwards; --angle: 270deg; }
+        .flower-3 .petal:nth-child(11) { animation: spiralBloom 0.5s ease-out 2.6s forwards; --angle: 300deg; }
+        .flower-3 .petal:nth-child(12) { animation: spiralBloom 0.5s ease-out 2.7s forwards; --angle: 330deg; }
+
+        @keyframes spiralBloom {
+            0% { opacity: 0; transform: rotate(var(--angle, 0deg)) translateY(20px) scale(0); }
+            100% { opacity: 1; transform: rotate(var(--angle, 0deg)) translateY(0) scale(1); }
+        }
+
+        .flower-3 .leaf {
+            width: 22px;
+            height: 22px;
+            background: #6b8e23;
+            border-radius: 0 50% 0 50%;
+            bottom: 30px;
+        }
+        .flower-3 .leaf.left { left: 35px; transform: rotate(-45deg); animation: growLeaf 0.5s ease-out 2.8s forwards; }
+        .flower-3 .leaf.right { right: 35px; transform: rotate(135deg); animation: growLeaf 0.5s ease-out 2.9s forwards; }
+
+        /* FLOWER 4: Rose - Blooms layered opening */
+        .flower-4 {
+            width: 100px;
+            height: 160px;
+        }
+
+        .flower-4 .stem { height: 70px; left: 48px; animation: growStem 1s ease-out 0.9s forwards; }
+
+        .flower-4 .petal {
+            position: absolute;
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            border-radius: 50% 50% 50% 0;
+            transform-origin: bottom left;
+            opacity: 0;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Layered bloom - inner to outer */
+        .flower-4 .petal:nth-child(1) {
+            width: 30px;
+            height: 30px;
+            top: 45px;
+            left: 45px;
+            z-index: 5;
+            animation: layerOpen 0.7s ease-out 2.0s forwards;
+            transform: rotate(-10deg);
+        }
+
+        .flower-4 .petal:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            top: 35px;
+            left: 35px;
+            z-index: 4;
+            background: linear-gradient(135deg, #e32636 0%, #a52a2a 100%);
+            animation: layerOpen 0.7s ease-out 2.2s forwards;
+            transform: rotate(30deg);
+        }
+
+        .flower-4 .petal:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            top: 25px;
+            left: 25px;
+            z-index: 3;
+            animation: layerOpen 0.7s ease-out 2.4s forwards;
+            transform: rotate(70deg);
+        }
+
+        .flower-4 .petal:nth-child(4) {
+            width: 55px;
+            height: 55px;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            background: linear-gradient(135deg, #e32636 0%, #a52a2a 100%);
+            animation: layerOpen 0.7s ease-out 2.6s forwards;
+            transform: rotate(110deg);
+        }
+
+        .flower-4 .petal:nth-child(5) {
+            width: 60px;
+            height: 60px;
+            top: 15px;
+            left: 15px;
+            z-index: 1;
+            animation: layerOpen 0.7s ease-out 2.8s forwards;
+            transform: rotate(150deg);
+        }
+
+        @keyframes layerOpen {
+            0% { opacity: 0; transform: scale(0) rotate(var(--rotation, 0deg)); }
+            100% { opacity: 1; transform: scale(1) rotate(var(--rotation, 0deg)); }
+        }
+
+        .flower-4 .leaf {
+            width: 20px;
+            height: 20px;
+            background: #2f4f2f;
+            border-radius: 0 50% 0 50%;
+            bottom: 25px;
+        }
+        .flower-4 .leaf.left { left: 30px; transform: rotate(-45deg); animation: growLeaf 0.5s ease-out 3.0s forwards; }
+        .flower-4 .leaf.right { right: 30px; transform: rotate(135deg); animation: growLeaf 0.5s ease-out 3.1s forwards; }
+
+        /* Shared animations */
+        @keyframes growStem {
+            0% { transform: scaleY(0); }
+            100% { transform: scaleY(1); }
+        }
+
+        @keyframes growLeaf {
+            0% { opacity: 0; transform: scale(0); }
+            100% { opacity: 1; transform: scale(1) rotate(var(--r, 0deg)); }
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0); }
+            80% { transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Message card - Typewriter paper style */
+        .message-card {
+            background: #fffef8;
+            border: 1px solid #d3c5b3;
+            border-radius: 2px;
+            padding: 50px;
+            margin-top: 60px;
+            box-shadow: 
+                0 1px 1px rgba(0,0,0,0.1),
+                0 2px 2px rgba(0,0,0,0.1),
+                0 4px 4px rgba(0,0,0,0.1),
+                0 8px 8px rgba(0,0,0,0.1),
+                inset 0 0 60px rgba(139, 69, 69, 0.05);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 1s ease-out 3.5s forwards;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Paper lines */
+        .message-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 60px;
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 182, 193, 0.3);
+            border-left: 1px solid rgba(255, 182, 193, 0.2);
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-card h2 {
+            font-family: 'Special Elite', 'Courier New', monospace;
+            color: #8b4513;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            margin-left: 20px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .message-content {
+            color: #2c2c2c;
+            font-size: 1.1em;
+            line-height: 2;
+            text-align: left;
+            margin-left: 20px;
+            font-family: 'Courier Prime', 'Courier New', monospace;
+        }
+
+        .message-content p {
+            margin-bottom: 20px;
+            text-indent: 0;
+        }
+
+        .signature {
+            margin-top: 40px;
+            font-family: 'Special Elite', 'Courier New', monospace;
+            color: #8b4513;
+            font-size: 1.1em;
+            text-align: right;
+            margin-right: 20px;
+            font-style: normal;
+        }
+
+        /* Typewriter key click effect */
+        .key-click {
+            position: fixed;
+            font-family: 'Courier Prime', monospace;
+            color: #8b4513;
+            font-size: 14px;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: fadeUp 1s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes fadeUp {
+            0% { opacity: 0.6; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-30px); }
+        }
+
+        /* Ink splatter decoration */
+        .ink-splatter {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(139, 69, 69, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .ink-splatter.top-left { top: -50px; left: -50px; }
+        .ink-splatter.bottom-right { bottom: -50px; right: -50px; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8em; }
+            .garden { gap: 20px; }
+            .message-card { padding: 30px 20px; }
+            .message-card::before { left: 40px; }
+            .message-content, .signature, h2 { margin-left: 10px; margin-right: 10px; }
+        }
+    </style>
 </head>
 <body>
-<canvas id="constellation"></canvas>
-  <main>
-    <!-- HERO -->
-    <section>
-      <h1>✨ To The Love of My Life ✨</h1>
-      <p style="text-align:center;">
-        Good morning my love x
-      </p>
-    </section>
+    <div class="container">
+        <h1 id="title"></h1>
 
-    <!-- MESSAGE CARD -->
-    <section>
-      <div class="card">
-        <h2>🐈 Today I Thought About</h2>
-        <!--<p class="typewriter" data-text="I had a wonderful time watching things with you this weekend. I've loved chatting about the things we've watched and expressing my feelings to you while watching and having you express yours. I cannot stress how much I love your commentary on the shows that we watch together. It increases my enjoyment immeasurably and I think of the things you say long after we've stopped watching. Thank you for being so wonderful.">
-        </p>-->
-        <p>You meeting my parents. Us coming home together and spending time with my family and spending time together as we grow old inshallah. It made me feel really happy.</p>
-      </div>
-    </section>
+        <!-- Flower Garden -->
+        <div class="garden">
+            <!-- Flower 1: Daisy - Ring Bloom -->
+            <div class="flower flower-1" onclick="createInk(event)">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+            </div>
 
-    <!-- ANOTHER MOMENT -->
+            <!-- Flower 2: Tulip - Upward Unfolding -->
+            <div class="flower flower-2" onclick="createInk(event)">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+            </div>
 
-    <!-- WILL YOU THOUGH??? -->
+            <!-- Flower 3: Sunflower - Spiral Bloom -->
+            <div class="flower flower-3" onclick="createInk(event)">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+            </div>
 
-    <section>
-      <div class="card">
-        <h2>You Really...</h2>
-  <img src="images/orangutan.jpg" alt="orangutan" style="max-width:100%; height:auto;">
-  <p>See me looking like this and think: "wow, so handsome"</p>
-      <!-- <a href="https://www.youtube.com/watch?v=qB5Lttr53Vk"
-   target="_blank"
-   style="
-     display: block;
-     text-align: center;
-     padding: 2.5rem;
-     border-radius: 16px;
-     background: rgba(255,255,255,0.2);
-     color: white;
-     text-decoration: none;
-     font-size: 1.2rem;
-   ">
-  You bring this energy a lot and I love you so much for it (Click Me)
-      </a> -->
-    </section>
+            <!-- Flower 4: Rose - Layered Opening -->
+            <div class="flower flower-4" onclick="createInk(event)">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+            </div>
+        </div>
 
-    <!-- INTERACTIVE SURPRISE -->
-    <section class="heart-container">
-      <div class="heart" id="heart">❤️</div>
-      <div class="secret" id="secret">
-          I am so in love with you.
-      </div>
-    </section>
+        <!-- Personal Message Section -->
+        <div class="message-card">
+            <div class="ink-splatter top-left"></div>
+            <div class="ink-splatter bottom-right"></div>
+            
+            <h2>To Bop,</h2>
+            <div class="message-content">
+                <!-- EDIT HERE: Add your personal message below -->
+                <p>Roses are red. Violets are blue. I've never met a person who, makes me feel the way you do.</p>
+                
+                <p>I pray that this is the last Valentine's day that we spend apart from one another. Though our last one in Japan was not particularly pleasant for you because I dropped the ball I pray these flowers that I programmed are somewhat comforting (you can refresh the page to watch them bloom again). Though I couldn't quite get the positioning of them right 😭.</p>
+                
+                <p>I fall more and more deeply in love with you everyday. Sometimes I feel it so strongly it's easy to imagine that it's a universal thing. Accepted and acknowledged as an eternal constant like the speed of Light. In reality of course it's not. And I apologise darling for my lack of competence in showing that love by surprising you. I'm working on it. I pray that I get better and that you stick with me to see.</p>
+                
+                <p>I'll end on a request. Please continue to love me. Continue to be with me and make my life special and bright. You are the first rays of the spring sunshine after a bleak winter. I'm so grateful for not only your existence but that you are in my life in such an important way. And I want to kiss your forehead and feed you when you grow old.</p>
+                <!-- END EDIT SECTION -->
+            </div>
+            <div class="signature">
+                Your chôm chôm,<br>
+                Adam.  
+            </div>
+        </div>
+    </div>
 
-    <section>
-  <h2 style="text-align:center;">Our Story ✨</h2>
-
-  <div class="image-row">
-  <img src="images/img_1.jpeg" alt="Memory one">
-  <img src="images/img_2.jpeg" alt="Memory two">
-  <img src="images/img_3.jpeg" alt="Memory three">
-</div>
-</section>
-
-
-    <footer>
-        The pictures I take without you noticing are my favourites 🥰 (in a non creepy way)
-    </footer>
-  </main>
-
-  <script>
-    /* ---------- PARTICLE GENERATOR ---------- */
-    const particleCount = 25;
-
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-
-      const size = Math.random() * 6 + 4;
-      particle.style.width = size + 'px';
-      particle.style.height = size + 'px';
-      particle.style.left = Math.random() * 100 + 'vw';
-      particle.style.animationDuration = (10 + Math.random() * 20) + 's';
-      particle.style.animationDelay = Math.random() * 20 + 's';
-
-      document.body.appendChild(particle);
-    }
-
-    /* ---------- SCROLL REVEAL ---------- */
-    const sections = document.querySelectorAll('section');
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+    <script>
+        // Typewriter effect for title
+        const titleText = "Happy Valentine's Day My Garlic 🧄";
+        const titleElement = document.getElementById('title');
+        let charIndex = 0;
+        
+        function typeWriter() {
+            if (charIndex < titleText.length) {
+                titleElement.innerHTML = titleText.substring(0, charIndex + 1) + '<span class="cursor"></span>';
+                charIndex++;
+                
+                // Random typing speed for realism
+                const randomDelay = Math.random() * 100 + 100;
+                setTimeout(typeWriter, randomDelay);
+            } else {
+                titleElement.innerHTML = titleText + '<span class="cursor"></span>';
+                // Keep cursor blinking after typing finishes
+            }
         }
-      });
-    }, { threshold: 0.2 });
 
-    sections.forEach(section => observer.observe(section));
+        // Start typing after a brief pause
+        setTimeout(typeWriter, 500);
 
-    /* ---------- HEART CLICK ---------- */
-    const heart = document.getElementById('heart');
-    const secret = document.getElementById('secret');
+        // Ink splatter effect on flower click
+        function createInk(event) {
+            const flower = event.currentTarget;
+            const rect = flower.getBoundingClientRect();
+            
+            // Create ink drops
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const ink = document.createElement('div');
+                    ink.style.position = 'fixed';
+                    ink.style.left = (rect.left + rect.width/2 + (Math.random() - 0.5) * 40) + 'px';
+                    ink.style.top = (rect.top + rect.height/2 + (Math.random() - 0.5) * 40) + 'px';
+                    ink.style.width = (Math.random() * 8 + 4) + 'px';
+                    ink.style.height = ink.style.width;
+                    ink.style.background = 'rgba(139, 69, 69, 0.3)';
+                    ink.style.borderRadius = '50%';
+                    ink.style.pointerEvents = 'none';
+                    ink.style.zIndex = '1000';
+                    ink.style.transform = 'scale(0)';
+                    ink.style.transition = 'transform 0.3s ease-out, opacity 0.5s ease-out';
+                    
+                    document.body.appendChild(ink);
+                    
+                    // Animate
+                    requestAnimationFrame(() => {
+                        ink.style.transform = 'scale(1)';
+                    });
+                    
+                    setTimeout(() => {
+                        ink.style.opacity = '0';
+                        setTimeout(() => ink.remove(), 500);
+                    }, 300);
+                }, i * 100);
+            }
 
-    heart.addEventListener('click', () => {
-      heart.textContent = '🐙';
-      secret.classList.add('revealed');
-    });
-  function typeWriter(element, speed = 50) {
-    const text = element.dataset.text;
-    let index = 0;
-
-    function type() {
-      if (index < text.length) {
-        element.textContent += text.charAt(index);
-        index++;
-        setTimeout(type, speed);
-      }
-    }
-    type();
-  }
-
-  document.querySelectorAll('.typewriter').forEach(el => {
-    const observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
-        typeWriter(el);
-        observer.disconnect();
-      }
-    }, { threshold: 0.6 });
-
-    observer.observe(el);
-  });
-
-  </script>
-  <!--<script>
-  const canvas = document.getElementById('constellation');
-  const ctx = canvas.getContext('2d');
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-
-  const stars = Array.from({ length: 80 }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.3,
-    vy: (Math.random() - 0.5) * 0.3
-  }));
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    stars.forEach(s => {
-      s.x += s.vx;
-      s.y += s.vy;
-
-      if (s.x < 0 || s.x > canvas.width) s.vx *= -1;
-      if (s.y < 0 || s.y > canvas.height) s.vy *= -1;
-
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,255,255,0.8)';
-      ctx.fill();
-    });
-
-    for (let i = 0; i < stars.length; i++) {
-      for (let j = i + 1; j < stars.length; j++) {
-        const dx = stars[i].x - stars[j].x;
-        const dy = stars[i].y - stars[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 120) {
-          ctx.strokeStyle = `rgba(255,255,255,${1 - dist / 120})`;
-          ctx.beginPath();
-          ctx.moveTo(stars[i].x, stars[i].y);
-          ctx.lineTo(stars[j].x, stars[j].y);
-          ctx.stroke();
+            // Occasionally show a letter floating up (typewriter key effect)
+            if (Math.random() > 0.5) {
+                const key = document.createElement('div');
+                key.className = 'key-click';
+                key.textContent = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                key.style.left = (rect.left + rect.width/2) + 'px';
+                key.style.top = (rect.top - 20) + 'px';
+                document.body.appendChild(key);
+                setTimeout(() => key.remove(), 1000);
+            }
         }
-      }
-    }
 
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-  </script>-->
-  <script>
-    const canvas = document.getElementById('constellation');
-    const ctx = canvas.getContext('2d');
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resize);
-    resize();
-
-    const hearts = Array.from({ length: 30 }, () => ({
-        x: Math.random() * canvas.width,
-        y: canvas.height + Math.random() * canvas.height,
-        speed: 0.3 + Math.random(),
-        size: 6 + Math.random() * 6
-    }));
-
-    function animateHearts() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        hearts.forEach(h => {
-            h.y -= h.speed;
-            if (h.y < -20) h.y = canvas.height + 20;
-
-            ctx.font = `${h.size+2}px serif`;
-            ctx.fillText('💕', h.x, h.y);
+        // Subtle paper rustle effect on mouse move
+        let lastX = 0, lastY = 0;
+        document.addEventListener('mousemove', (e) => {
+            const deltaX = e.clientX - lastX;
+            const deltaY = e.clientY - lastY;
+            
+            if (Math.abs(deltaX) > 50 || Math.abs(deltaY) > 50) {
+                const flowers = document.querySelectorAll('.flower');
+                flowers.forEach((flower, index) => {
+                    const subtleMove = (index % 2 === 0 ? 1 : -1) * 2;
+                    flower.style.transform = `translateX(${subtleMove}px)`;
+                    setTimeout(() => {
+                        flower.style.transform = 'translateX(0)';
+                    }, 300);
+                });
+                
+                lastX = e.clientX;
+                lastY = e.clientY;
+            }
         });
-
-        requestAnimationFrame(animateHearts);
-    }
-
-    animateHearts();
-
-  </script>
-
-
+    </script>
 </body>
 </html>
-
