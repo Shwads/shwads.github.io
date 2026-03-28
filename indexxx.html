@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Morning My Goose</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier Prime', 'Courier New', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #f4f1ea;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 69, 69, 0.03) 2px, rgba(139, 69, 69, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 69, 69, 0.03) 2px, rgba(139, 69, 69, 0.03) 4px);
+            position: relative;
+            color: #2c2c2c;
+        }
+
+        /* Paper texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 69, 69, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(160, 82, 82, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(139, 69, 69, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Vignette effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(139, 69, 69, 0.08) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Main content container */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Special Elite', 'Courier New', monospace;
+            font-size: 2.5em;
+            color: #8b4513;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            min-height: 1.2em;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Cursor blink */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.1em;
+            background: #8b4513;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Flower garden */
+        .garden {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+            min-height: 220px;
+            align-items: flex-end;
+        }
+
+        .flower {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .flower:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Common stem and leaf styles */
+        .stem {
+            position: absolute;
+            width: 3px;
+            background: #4a5d23;
+            bottom: 0;
+            transform-origin: bottom;
+            transform: scaleY(0);
+        }
+
+        .leaf {
+            position: absolute;
+            background: #5c6b2f;
+            opacity: 0;
+        }
+
+        /* FLOWER 1: Classic Daisy - Blooms in ring */
+        .flower-1 {
+            width: 100px;
+            height: 160px;
+        }
+
+        .flower-1 .stem { height: 70px; left: 48px; animation: growStem 1s ease-out forwards; }
+        
+        .flower-1 .center {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #daa520;
+            border-radius: 50%;
+            top: 45px;
+            left: 51px;
+            z-index: 5;
+            opacity: 0;
+            animation: popIn 0.3s ease-out 1s forwards;
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.2);
+        }
+
+        .flower-1 .petal {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: #ffb7c5;
+            border-radius: 50% 50% 50% 0;
+            top: 25px;
+            left: 32px;
+            transform-origin: bottom right;
+            opacity: 0;
+            transform: scale(0) rotate(-45deg);
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .flower-1 .petal:nth-child(1) { animation: bloomRing 0.6s ease-out 0.2s forwards; }
+        .flower-1 .petal:nth-child(2) { animation: bloomRing 0.6s ease-out 0.4s forwards; --rotation: 72deg; }
+        .flower-1 .petal:nth-child(3) { animation: bloomRing 0.6s ease-out 0.6s forwards; --rotation: 144deg; }
+        .flower-1 .petal:nth-child(4) { animation: bloomRing 0.6s ease-out 0.8s forwards; --rotation: 216deg; }
+        .flower-1 .petal:nth-child(5) { animation: bloomRing 0.6s ease-out 1.0s forwards; --rotation: 288deg; }
+
+        @keyframes bloomRing {
+            0% { opacity: 0; transform: scale(0) rotate(-45deg); }
+            100% { opacity: 1; transform: scale(1) rotate(calc(-45deg + var(--rotation, 0deg))); }
+        }
+
+        .flower-1 .leaf {
+            width: 18px;
+            height: 18px;
+            border-radius: 0 50% 0 50%;
+            bottom: 25px;
+        }
+        .flower-1 .leaf.left { left: 30px; transform: rotate(-45deg); animation: growLeaf 0.5s ease-out 1.2s forwards; }
+        .flower-1 .leaf.right { right: 30px; transform: rotate(135deg); animation: growLeaf 0.5s ease-out 1.4s forwards; }
+
+        /* FLOWER 2: Tulip - Blooms upward unfolding */
+        .flower-2 {
+            width: 90px;
+            height: 150px;
+        }
+
+        .flower-2 .stem { height: 60px; left: 43px; animation: growStem 1s ease-out 0.3s forwards; }
+
+        .flower-2 .petal {
+            position: absolute;
+            bottom: 60px;
+            background: #c71585;
+            transform-origin: bottom center;
+            opacity: 0;
+        }
+
+        /* Tulip petals unfold upward */
+        .flower-2 .petal:nth-child(1) {
+            width: 40px;
+            height: 50px;
+            left: 25px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: unfoldUp 0.8s ease-out 1.3s forwards;
+            z-index: 3;
+        }
+
+        .flower-2 .petal:nth-child(2) {
+            width: 35px;
+            height: 45px;
+            left: 15px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            background: #db7093;
+            animation: unfoldUp 0.8s ease-out 1.5s forwards;
+            z-index: 2;
+        }
+
+        .flower-2 .petal:nth-child(3) {
+            width: 35px;
+            height: 45px;
+            right: 15px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            background: #db7093;
+            animation: unfoldUp 0.8s ease-out 1.7s forwards;
+            z-index: 2;
+        }
+
+        @keyframes unfoldUp {
+            0% { opacity: 0; transform: scaleY(0) scaleX(0.5); }
+            100% { opacity: 1; transform: scaleY(1) scaleX(1); }
+        }
+
+        .flower-2 .leaf {
+            width: 25px;
+            height: 15px;
+            background: #556b2f;
+            border-radius: 50% 0 50% 0;
+            bottom: 20px;
+        }
+        .flower-2 .leaf.left { left: 20px; transform: rotate(-30deg); animation: growLeaf 0.5s ease-out 1.9s forwards; }
+        .flower-2 .leaf.right { right: 20px; transform: rotate(150deg); animation: growLeaf 0.5s ease-out 2.0s forwards; }
+
+        /* FLOWER 3: Sunflower - Blooms outward spiral */
+        .flower-3 {
+            width: 110px;
+            height: 170px;
+        }
+
+        .flower-3 .stem { height: 75px; left: 53px; animation: growStem 1s ease-out 0.6s forwards; }
+
+        .flower-3 .center {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: #8b4513;
+            border-radius: 50%;
+            top: 60px;
+            left: 35px;
+            z-index: 10;
+            opacity: 0;
+            animation: popIn 0.4s ease-out 2.2s forwards;
+            box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3);
+        }
+
+        .flower-3 .petal {
+            position: absolute;
+            width: 20px;
+            height: 45px;
+            background: #ffd700;
+            border-radius: 50% 50% 50% 50%;
+            top: 30px;
+            left: 42px;
+            transform-origin: center bottom;
+            opacity: 0;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+        }
+
+        /* Spiral bloom pattern */
+        .flower-3 .petal:nth-child(1) { animation: spiralBloom 0.5s ease-out 1.6s forwards; }
+        .flower-3 .petal:nth-child(2) { animation: spiralBloom 0.5s ease-out 1.7s forwards; --angle: 30deg; }
+        .flower-3 .petal:nth-child(3) { animation: spiralBloom 0.5s ease-out 1.8s forwards; --angle: 60deg; }
+        .flower-3 .petal:nth-child(4) { animation: spiralBloom 0.5s ease-out 1.9s forwards; --angle: 90deg; }
+        .flower-3 .petal:nth-child(5) { animation: spiralBloom 0.5s ease-out 2.0s forwards; --angle: 120deg; }
+        .flower-3 .petal:nth-child(6) { animation: spiralBloom 0.5s ease-out 2.1s forwards; --angle: 150deg; }
+        .flower-3 .petal:nth-child(7) { animation: spiralBloom 0.5s ease-out 2.2s forwards; --angle: 180deg; }
+        .flower-3 .petal:nth-child(8) { animation: spiralBloom 0.5s ease-out 2.3s forwards; --angle: 210deg; }
+        .flower-3 .petal:nth-child(9) { animation: spiralBloom 0.5s ease-out 2.4s forwards; --angle: 240deg; }
+        .flower-3 .petal:nth-child(10) { animation: spiralBloom 0.5s ease-out 2.5s forwards; --angle: 270deg; }
+        .flower-3 .petal:nth-child(11) { animation: spiralBloom 0.5s ease-out 2.6s forwards; --angle: 300deg; }
+        .flower-3 .petal:nth-child(12) { animation: spiralBloom 0.5s ease-out 2.7s forwards; --angle: 330deg; }
+
+        @keyframes spiralBloom {
+            0% { opacity: 0; transform: rotate(var(--angle, 0deg)) translateY(20px) scale(0); }
+            100% { opacity: 1; transform: rotate(var(--angle, 0deg)) translateY(0) scale(1); }
+        }
+
+        .flower-3 .leaf {
+            width: 22px;
+            height: 22px;
+            background: #6b8e23;
+            border-radius: 0 50% 0 50%;
+            bottom: 30px;
+        }
+        .flower-3 .leaf.left { left: 35px; transform: rotate(-45deg); animation: growLeaf 0.5s ease-out 2.8s forwards; }
+        .flower-3 .leaf.right { right: 35px; transform: rotate(135deg); animation: growLeaf 0.5s ease-out 2.9s forwards; }
+
+        /* FLOWER 4: Rose - Blooms layered opening */
+        .flower-4 {
+            width: 100px;
+            height: 160px;
+        }
+
+        .flower-4 .stem { height: 70px; left: 48px; animation: growStem 1s ease-out 0.9s forwards; }
+
+        .flower-4 .petal {
+            position: absolute;
+            background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+            border-radius: 50% 50% 50% 0;
+            transform-origin: bottom left;
+            opacity: 0;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Layered bloom - inner to outer */
+        .flower-4 .petal:nth-child(1) {
+            width: 30px;
+            height: 30px;
+            top: 45px;
+            left: 45px;
+            z-index: 5;
+            animation: layerOpen 0.7s ease-out 2.0s forwards;
+            transform: rotate(-10deg);
+        }
+
+        .flower-4 .petal:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            top: 35px;
+            left: 35px;
+            z-index: 4;
+            background: linear-gradient(135deg, #e32636 0%, #a52a2a 100%);
+            animation: layerOpen 0.7s ease-out 2.2s forwards;
+            transform: rotate(30deg);
+        }
+
+        .flower-4 .petal:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            top: 25px;
+            left: 25px;
+            z-index: 3;
+            animation: layerOpen 0.7s ease-out 2.4s forwards;
+            transform: rotate(70deg);
+        }
+
+        .flower-4 .petal:nth-child(4) {
+            width: 55px;
+            height: 55px;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            background: linear-gradient(135deg, #e32636 0%, #a52a2a 100%);
+            animation: layerOpen 0.7s ease-out 2.6s forwards;
+            transform: rotate(110deg);
+        }
+
+        .flower-4 .petal:nth-child(5) {
+            width: 60px;
+            height: 60px;
+            top: 15px;
+            left: 15px;
+            z-index: 1;
+            animation: layerOpen 0.7s ease-out 2.8s forwards;
+            transform: rotate(150deg);
+        }
+
+        @keyframes layerOpen {
+            0% { opacity: 0; transform: scale(0) rotate(var(--rotation, 0deg)); }
+            100% { opacity: 1; transform: scale(1) rotate(var(--rotation, 0deg)); }
+        }
+
+        .flower-4 .leaf {
+            width: 20px;
+            height: 20px;
+            background: #2f4f2f;
+            border-radius: 0 50% 0 50%;
+            bottom: 25px;
+        }
+        .flower-4 .leaf.left { left: 30px; transform: rotate(-45deg); animation: growLeaf 0.5s ease-out 3.0s forwards; }
+        .flower-4 .leaf.right { right: 30px; transform: rotate(135deg); animation: growLeaf 0.5s ease-out 3.1s forwards; }
+
+        /* Shared animations */
+        @keyframes growStem {
+            0% { transform: scaleY(0); }
+            100% { transform: scaleY(1); }
+        }
+
+        @keyframes growLeaf {
+            0% { opacity: 0; transform: scale(0); }
+            100% { opacity: 1; transform: scale(1) rotate(var(--r, 0deg)); }
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0); }
+            80% { transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Message card - Typewriter paper style */
+        .message-card {
+            background: #fffef8;
+            border: 1px solid #d3c5b3;
+            border-radius: 2px;
+            padding: 50px;
+            margin-top: 60px;
+            box-shadow: 
+                0 1px 1px rgba(0,0,0,0.1),
+                0 2px 2px rgba(0,0,0,0.1),
+                0 4px 4px rgba(0,0,0,0.1),
+                0 8px 8px rgba(0,0,0,0.1),
+                inset 0 0 60px rgba(139, 69, 69, 0.05);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 1s ease-out 3.5s forwards;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Paper lines */
+        .message-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 60px;
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 182, 193, 0.3);
+            border-left: 1px solid rgba(255, 182, 193, 0.2);
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-card h2 {
+            font-family: 'Special Elite', 'Courier New', monospace;
+            color: #8b4513;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            margin-left: 20px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .message-content {
+            color: #2c2c2c;
+            font-size: 1.1em;
+            line-height: 2;
+            text-align: left;
+            margin-left: 20px;
+            font-family: 'Courier Prime', 'Courier New', monospace;
+        }
+
+        .message-content p {
+            margin-bottom: 20px;
+            text-indent: 0;
+        }
+
+        .signature {
+            margin-top: 40px;
+            font-family: 'Special Elite', 'Courier New', monospace;
+            color: #8b4513;
+            font-size: 1.1em;
+            text-align: right;
+            margin-right: 20px;
+            font-style: normal;
+        }
+
+        /* Typewriter key click effect */
+        .key-click {
+            position: fixed;
+            font-family: 'Courier Prime', monospace;
+            color: #8b4513;
+            font-size: 14px;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: fadeUp 1s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes fadeUp {
+            0% { opacity: 0.6; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-30px); }
+        }
+
+        /* Ink splatter decoration */
+        .ink-splatter {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(139, 69, 69, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .ink-splatter.top-left { top: -50px; left: -50px; }
+        .ink-splatter.bottom-right { bottom: -50px; right: -50px; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8em; }
+            .garden { gap: 20px; }
+            .message-card { padding: 30px 20px; }
+            .message-card::before { left: 40px; }
+            .message-content, .signature, h2 { margin-left: 10px; margin-right: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="title"></h1>
+
+        <!-- Flower Garden -->
+        <div class="garden">
+            <!-- Flower 1: Daisy - Ring Bloom -->
+            <div class="flower flower-1" onclick="createInk(event)">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+            </div>
+
+            <!-- Flower 2: Tulip - Upward Unfolding -->
+            <div class="flower flower-2" onclick="createInk(event)">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+            </div>
+
+            <!-- Flower 3: Sunflower - Spiral Bloom -->
+            <div class="flower flower-3" onclick="createInk(event)">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+            </div>
+
+            <!-- Flower 4: Rose - Layered Opening -->
+            <div class="flower flower-4" onclick="createInk(event)">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+            </div>
+        </div>
+
+        <!-- Personal Message Section -->
+        <div class="message-card">
+            <div class="ink-splatter top-left"></div>
+            <div class="ink-splatter bottom-right"></div>
+            
+            <h2>4 Years ago...</h2>
+            <div class="message-content">
+                <!-- EDIT HERE: Add your personal message below -->
+                <p>I would never have imagined that in the next 5 years I'd be introducing my partner to my parents.</p>
+                
+                <p>I yearned to have somebody to speak to about my feelings and share my thoughts and my life with. Someone who's life and feelings I in turn could understand and who's thoughts I could hear.</p>
+
+                <p>I mention these things to say only that I am conscious everyday of the blessing you are in my life and how much I wished to meet you before I even knew you existed.</p>
+                
+                <p>It's true that you warned me not to set too high a standard. Given the chance to do it all again however I'd change nothing. I remember at the start of our relationship when you'd express amazement at my treatment of you I would insist that it was simply the way that you deserve to be treated. I still feel that way and if I've slipped in that then I suppose I've just failed to continue treating you the way that you deserve. I genuinely regret that and will do my best to rectify it.</p>
+                
+                <p>Wake up and do not forgive me. Be upset with me and resent me for the way I've treated you. Do it for me so that I can start being patient with you again. May we both become thankful for it.</p>
+
+                <p>Goodnight darling. I do love you.</p>
+                <!-- END EDIT SECTION -->
+            </div>
+            <div class="signature">
+                Yours for as long as you'll have me,<br>
+                Adam.  
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Typewriter effect for title
+        const titleText = "Dearest Bop";
+        const titleElement = document.getElementById('title');
+        let charIndex = 0;
+        
+        function typeWriter() {
+            if (charIndex < titleText.length) {
+                titleElement.innerHTML = titleText.substring(0, charIndex + 1) + '<span class="cursor"></span>';
+                charIndex++;
+                
+                // Random typing speed for realism
+                const randomDelay = Math.random() * 100 + 100;
+                setTimeout(typeWriter, randomDelay);
+            } else {
+                titleElement.innerHTML = titleText + '<span class="cursor"></span>';
+                // Keep cursor blinking after typing finishes
+            }
+        }
+
+        // Start typing after a brief pause
+        setTimeout(typeWriter, 500);
+
+        // Ink splatter effect on flower click
+        function createInk(event) {
+            const flower = event.currentTarget;
+            const rect = flower.getBoundingClientRect();
+            
+            // Create ink drops
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const ink = document.createElement('div');
+                    ink.style.position = 'fixed';
+                    ink.style.left = (rect.left + rect.width/2 + (Math.random() - 0.5) * 40) + 'px';
+                    ink.style.top = (rect.top + rect.height/2 + (Math.random() - 0.5) * 40) + 'px';
+                    ink.style.width = (Math.random() * 8 + 4) + 'px';
+                    ink.style.height = ink.style.width;
+                    ink.style.background = 'rgba(139, 69, 69, 0.3)';
+                    ink.style.borderRadius = '50%';
+                    ink.style.pointerEvents = 'none';
+                    ink.style.zIndex = '1000';
+                    ink.style.transform = 'scale(0)';
+                    ink.style.transition = 'transform 0.3s ease-out, opacity 0.5s ease-out';
+                    
+                    document.body.appendChild(ink);
+                    
+                    // Animate
+                    requestAnimationFrame(() => {
+                        ink.style.transform = 'scale(1)';
+                    });
+                    
+                    setTimeout(() => {
+                        ink.style.opacity = '0';
+                        setTimeout(() => ink.remove(), 500);
+                    }, 300);
+                }, i * 100);
+            }
+
+            // Occasionally show a letter floating up (typewriter key effect)
+            if (Math.random() > 0.5) {
+                const key = document.createElement('div');
+                key.className = 'key-click';
+                key.textContent = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                key.style.left = (rect.left + rect.width/2) + 'px';
+                key.style.top = (rect.top - 20) + 'px';
+                document.body.appendChild(key);
+                setTimeout(() => key.remove(), 1000);
+            }
+        }
+
+        // Subtle paper rustle effect on mouse move
+        let lastX = 0, lastY = 0;
+        document.addEventListener('mousemove', (e) => {
+            const deltaX = e.clientX - lastX;
+            const deltaY = e.clientY - lastY;
+            
+            if (Math.abs(deltaX) > 50 || Math.abs(deltaY) > 50) {
+                const flowers = document.querySelectorAll('.flower');
+                flowers.forEach((flower, index) => {
+                    const subtleMove = (index % 2 === 0 ? 1 : -1) * 2;
+                    flower.style.transform = `translateX(${subtleMove}px)`;
+                    setTimeout(() => {
+                        flower.style.transform = 'translateX(0)';
+                    }, 300);
+                });
+                
+                lastX = e.clientX;
+                lastY = e.clientY;
+            }
+        });
+    </script>
+</body>
+</html>
