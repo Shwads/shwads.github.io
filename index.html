@@ -1,223 +1,838 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Her Royal Highness</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <title>Adam and Bop</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
+  <style>
+    :root {
+      --text: #493543;
+      --muted: #866d7c;
+      --card: rgba(255, 255, 255, 0.76);
+      --white-soft: rgba(255, 255, 255, 0.88);
 
-/* SECTIONS */
-section {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  padding: 20px;
-}
+      --pink: #ffb3d1;
+      --rose: #ff86b7;
+      --lavender: #cdbdff;
+      --blue: #bfe7ff;
+      --mint: #c8f7dc;
+      --peach: #ffd4bc;
+      --butter: #fff0b8;
 
-/* SKY */
-.sky {
-  background: linear-gradient(-45deg, #89CFF0, #dbeafe, #fdfbfb);
-  background-size: 400% 400%;
-  animation: skyMove 15s ease infinite;
-}
+      --shadow: 0 18px 45px rgba(154, 91, 132, 0.18);
+      --radius: 28px;
+    }
 
-@keyframes skyMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* ITALY SCENE */
-.italy {
-  background: linear-gradient(to bottom, #c2e59c, #64b3f4);
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* FLIGHT */
-.flight {
-  background: linear-gradient(to bottom, #1e3c72, #2a5298);
-  color: white;
-}
+    body {
+      min-height: 100vh;
+      font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(
+          180deg,
+          #fff5fb 0%,
+          #f8f0ff 18%,
+          #eef8ff 36%,
+          #f0fff6 54%,
+          #fff8df 72%,
+          #fff0ec 88%,
+          #fff5fb 100%
+        );
+      overflow-x: hidden;
+    }
 
-/* LONDON */
-.london {
-  background: linear-gradient(to bottom, #2c3e50, #4ca1af);
-  color: white;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(255, 179, 209, 0.58), transparent 28%),
+        radial-gradient(circle at 86% 18%, rgba(205, 189, 255, 0.48), transparent 30%),
+        radial-gradient(circle at 16% 72%, rgba(200, 247, 220, 0.42), transparent 34%),
+        radial-gradient(circle at 82% 78%, rgba(255, 212, 188, 0.48), transparent 32%);
+      filter: blur(8px);
+    }
 
-/* FINAL */
-.final {
-  background: black;
-  color: white;
-}
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.35;
+      background-image:
+        radial-gradient(circle, rgba(255, 134, 183, 0.28) 2px, transparent 2px),
+        radial-gradient(circle, rgba(191, 231, 255, 0.28) 2px, transparent 2px);
+      background-size: 42px 42px, 64px 64px;
+      background-position: 0 0, 22px 18px;
+    }
 
-/* TEXT */
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-}
+    .scroll-glow {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255, 179, 209, 0.42), transparent 30%),
+        radial-gradient(circle at 50% 60%, rgba(205, 189, 255, 0.32), transparent 34%);
+      opacity: 0.75;
+      transition: background 0.25s linear;
+    }
 
-h2 {
-  font-size: 2rem;
-}
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 80px 20px 52px;
+      overflow: hidden;
+    }
 
-.cursive {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2.5rem;
-}
+    .hero-inner {
+      max-width: 820px;
+      position: relative;
+      z-index: 1;
+    }
 
-/* PLANE */
-.plane {
-  position: absolute;
-  font-size: 2rem;
-  transition: all 1s ease;
-}
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 19px;
+      margin-bottom: 24px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 10px 28px rgba(255, 134, 183, 0.18);
+      color: #df6299;
+      font-weight: 800;
+      backdrop-filter: blur(14px);
+    }
 
-/* PATH LINE */
-.path {
-  position: absolute;
-  width: 0;
-  height: 3px;
-  background: white;
-  top: 50%;
-  left: 10%;
-  transition: width 2s ease;
-}
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 6.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      color: #573247;
+      margin-bottom: 24px;
+    }
 
-/* BUTTON */
-.btn {
-  padding: 12px 25px;
-  background: gold;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  margin-top: 20px;
-}
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 2.2vw, 1.22rem);
+      line-height: 1.85;
+    }
 
-/* OVERLAY */
-.overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: black;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 10;
-  transition: opacity 2s;
-}
+    .hero-note {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.62);
+      color: #7d6073;
+      box-shadow: 0 12px 30px rgba(154, 91, 132, 0.12);
+      backdrop-filter: blur(12px);
+      font-size: 0.95rem;
+    }
 
-.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
+    .floating-heart {
+      position: absolute;
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      opacity: 0.58;
+      animation: float 5.8s ease-in-out infinite;
+      user-select: none;
+    }
 
-</style>
+    .heart-one {
+      top: 14%;
+      left: 9%;
+    }
+
+    .heart-two {
+      top: 20%;
+      right: 10%;
+      animation-delay: 1.3s;
+    }
+
+    .heart-three {
+      bottom: 18%;
+      left: 17%;
+      animation-delay: 2.1s;
+    }
+
+    .heart-four {
+      bottom: 13%;
+      right: 19%;
+      animation-delay: 3.2s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(-7deg);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(8deg);
+      }
+    }
+
+    .timeline-wrapper {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 20px 0 90px;
+      position: relative;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 16px 0 30px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 5px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(
+        180deg,
+        var(--pink),
+        var(--lavender),
+        var(--blue),
+        var(--mint),
+        var(--butter),
+        var(--peach),
+        var(--rose)
+      );
+      box-shadow: 0 0 24px rgba(255, 134, 183, 0.38);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 76px 1fr;
+      align-items: center;
+      margin: 52px 0;
+      opacity: 0;
+      transform: translateY(26px);
+      animation: appear 0.75s ease forwards;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-card {
+      grid-column: 1;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot {
+      grid-column: 2;
+    }
+
+    .timeline-item:nth-child(even) .timeline-card {
+      grid-column: 3;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      grid-column: 2;
+    }
+
+    .timeline-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(16px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .timeline-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.45),
+          transparent 42%
+        );
+      z-index: 1;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-8px) rotate(-0.35deg);
+      box-shadow: 0 26px 60px rgba(154, 91, 132, 0.24);
+    }
+
+    .timeline-img-wrap {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, #ffe8f3, #f4edff);
+    }
+
+    .timeline-img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.45s ease;
+    }
+
+    .timeline-card:hover .timeline-img {
+      transform: scale(1.055);
+    }
+
+    .date-pill {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #df6299;
+      font-size: 0.86rem;
+      font-weight: 900;
+      box-shadow: 0 8px 22px rgba(73, 53, 67, 0.13);
+    }
+
+    .timeline-content {
+      position: relative;
+      z-index: 2;
+      padding: 24px 24px 26px;
+    }
+
+    .timeline-content h2 {
+      color: #573247;
+      font-size: clamp(1.25rem, 2vw, 1.55rem);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .timeline-content p {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 1rem;
+    }
+
+    .timeline-dot {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      z-index: 3;
+    }
+
+    .timeline-dot::before {
+      content: "♡";
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffffff, #ffe6f1);
+      border: 4px solid rgba(255, 134, 183, 0.9);
+      color: #df6299;
+      font-size: 1.45rem;
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(255, 134, 183, 0.35);
+    }
+
+    .ending-note {
+      width: min(780px, calc(100% - 36px));
+      margin: 0 auto 80px;
+      padding: clamp(26px, 5vw, 42px);
+      text-align: center;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+    }
+
+    .ending-note h2 {
+      font-size: clamp(1.85rem, 5vw, 3rem);
+      margin-bottom: 14px;
+      color: #573247;
+      letter-spacing: -0.04em;
+    }
+
+    .ending-note p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.06rem;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 0 20px 44px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @keyframes appear {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        min-height: 76vh;
+        padding-top: 64px;
+      }
+
+      .floating-heart {
+        opacity: 0.38;
+      }
+
+      .timeline-wrapper {
+        width: min(100% - 26px, 1120px);
+      }
+
+      .timeline::before {
+        left: 34px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
+        grid-template-columns: 68px 1fr;
+        margin: 38px 0;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-card,
+      .timeline-item:nth-child(even) .timeline-card {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .timeline-dot {
+        width: 68px;
+      }
+
+      .timeline-dot::before {
+        width: 39px;
+        height: 39px;
+        border-width: 3px;
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hero {
+        min-height: auto;
+        padding: 58px 18px 42px;
+      }
+
+      .hero-badge {
+        font-size: 0.9rem;
+      }
+
+      .hero-note {
+        border-radius: 22px;
+        line-height: 1.5;
+      }
+
+      .timeline-wrapper {
+        width: min(100% - 18px, 1120px);
+      }
+
+      .timeline::before {
+        left: 25px;
+        width: 4px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
+        grid-template-columns: 50px 1fr;
+        margin: 32px 0;
+      }
+
+      .timeline-dot {
+        width: 50px;
+      }
+
+      .timeline-dot::before {
+        width: 31px;
+        height: 31px;
+        font-size: 0.95rem;
+      }
+
+      .timeline-card {
+        border-radius: 22px;
+      }
+
+      .timeline-content {
+        padding: 20px;
+      }
+
+      .date-pill {
+        left: 12px;
+        bottom: 12px;
+        font-size: 0.78rem;
+        padding: 8px 12px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="scroll-glow" id="scrollGlow"></div>
 
-<!-- INTRO -->
-<div class="overlay" id="overlay">
-  <h1 class="cursive">Welcome Princess Garlic of Darlington 👑</h1>
-  <p>We have long hoped for the arrival of British Bop</p>
-</div>
+  <header class="hero">
+    <div class="floating-heart heart-one">🪿</div>
+    <div class="floating-heart heart-two">😗</div>
+    <div class="floating-heart heart-three">🦀</div>
+    <div class="floating-heart heart-four">🐡</div>
 
-<!-- SCENE 1 -->
-<section class="sky">
-  <h1>Welcome back to the UK 🇬🇧</h1>
-  <p id="typing"></p>
-</section>
+    <div class="hero-inner">
+      <div class="hero-badge">A Tale of 3.5 Years</div>
 
-<!-- SCENE 2 ITALY -->
-<section class="italy">
-  <h2 data-aos="fade-up">From beautiful Padua 🇮🇹</h2>
-  <p data-aos="fade-up" data-aos-delay="200">
-    With your not so beautiful pork eating housemates
-  </p>
-</section>
+      <h1>Adam and Bop</h1>
 
-<!-- SCENE 3 FLIGHT -->
-<section class="flight">
-  <h2 data-aos="fade-up">Across the skies ✈️</h2>
-  <p data-aos="fade-up" data-aos-delay="200">
-    Tragically without good snackalicious options
-  </p>
+      <p>
+      Long overdue and barely a scratch on the surface. A new habit not a momentary spark.
+      </p>
 
-  <div class="path" id="path"></div>
-  <div class="plane" id="plane">✈️</div>
-</section>
+      <div class="hero-note">
+        I've been reflecting on us. And how things have changed.
+      </div>
+    </div>
+  </header>
 
-<!-- SCENE 4 LONDON -->
-<section class="london">
-  <h2 data-aos="fade-up">To gloomy Birmingham hm 🇬🇧</h2>
-  <p data-aos="fade-up" data-aos-delay="200">
-    Since you stepped off the plane it no longer feels so chilly.
-  </p>
-</section>
+  <main class="timeline-wrapper">
+    <section class="timeline" id="timeline"></section>
+  </main>
 
-<!-- SCENE 5 FINAL -->
-<section class="final">
-  <h1 class="cursive">Welcome back my sweetheart</h1>
-  <p>I pray I can make your stay joyous and comfortable and relaxing and fun.</p>
-  <button class="btn" onclick="finalSurprise()">If I may be so bold to make a request...</button>
-</section>
+  <section class="ending-note">
+    <h2>I'm Sorry</h2>
+    <p>
+    Through 3.5 years you've given more to me and more of yourself to me than I could ever have deserved. Every single moment that you've been mine and every single moment that I've been yours has been something from a fairytale.
+    </p>
+    <p>
+    I'm sorry it took me 3.5 years to understand. I'm sorry that there are still things which I no doubt do not understand. I expect nothing from you now. I can try to salvage things and I will. But should you choose to leave now, the wealth of happiness you have given me is already more than I could have asked for. I'm sorry for exacting such a heavy toll on you in return.
+    </p>
+    <p>
+    If you have the will then there's room to discuss things. I see a change in myself as I reflect on the years and in telling myself to work towards the future I have taken some wrong turns. With reflection I will correct the course. I just hope that it's not too late.
+    </p>
+  </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script>
-AOS.init();
+  <footer class="footer">
+      - Adam
+  </footer>
 
-/* Typing */
-const text = "I've been excited for this since the moment you left.";
-let i = 0;
+  <script>
+    /*
+      HOW TO ADD YOUR PHOTOS
 
-function type() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(type, 40);
-  }
-}
-type();
+      1. Create a folder called "images" next to this index.html file.
+      2. Add your images inside that folder.
+      3. Name them like this:
 
-/* Overlay fade */
-setTimeout(() => {
-  document.getElementById("overlay").classList.add("hidden");
-}, 2500);
+         img_1.jpg
+         img_2.jpg
+         img_3.jpg
+         ...
+         img_31.jpg
 
-/* Scroll animation */
-window.addEventListener("scroll", () => {
-  let scroll = window.scrollY;
-  let plane = document.getElementById("plane");
-  let path = document.getElementById("path");
+      4. Update the image field below if your image uses .png, .jpeg, .webp, etc.
 
-  if (scroll > window.innerHeight * 1.5) {
-    plane.style.left = "70%";
-    plane.style.top = "40%";
-    path.style.width = "60%";
-  }
-});
+      Example:
+      image: "images/img_1.jpg"
 
-/* Final surprise */
-function finalSurprise() {
-  alert("May I please choose your outfits in the coming nights? 🥺");
-}
-</script>
+      HOW TO ADD MORE ENTRIES
 
+      Copy one object in the timelineItems array and paste it at the end.
+      Change the date, title, description, and image path.
+    */
+
+    const timelineItems = [
+      {
+        date: "6th October 2022",
+        title: "Our First Date",
+        description: "Where it all began. I remember being late to our date thinking what a disaster it would be. Was it worth meeting up just to chat? I'd felt lonely since Abdullah had gone home and felt like it would be nice to have a conversation with somebody and learn a bit about the place. I had no idea that the next 3.5 years would come as a cascade from that one late Hanoi night.",
+        image: "images/img_1.jpg"
+      },
+      {
+        date: "23rd October 2022",
+        title: "Our First Time Travelling Together",
+        description: "Danang. You'd just bought an iced tea on our way to this gallery and the vendor had grabbed the ice with his hand. You offered me a sip and I politely declined. I remember you pretended to kick me and we laughed about it. A woman rode past on her bicycle and laughed with us. When she did, for a brief moment I saw us through her eyes. The eyes of someone who didn't know us, who only saw the way we looked at eachother and the way we laughed with eachother. I'll never forget how good it felt.",
+        image: "images/img_2.jpg"
+      },
+      {
+        date: "29th October 2022",
+        title: "The Night We Had Dinner With Your Students",
+          description: "They were so curious. I remember recommending the autobiography of Malcolm X to them, then feeling so disappointed that it had never been translated into Vietnamese (are you looking for a side project? 🙃). Again I saw us from the eyes of others. I felt so optimistic. There was nothing in the world that could stop us or put distance between us. It was truly you and I and the rest of the world existed only as our witness.",
+        image: "images/img_3.jpg"
+      },
+      {
+        date: "14th December 2022",
+        title: "Hanoi Walks",
+        description: "The days started to get cold. We'd come back from Thailand and had started to get alarmed at how fast we were gaining weight. We'd go for a walk in the evening to try and offset the calories we were taking in. Coffee would be so scared the whole time but it was lovely. We'd sit on the benches and wander around talking about nothing of consequence at all and yet the time was everything.",
+        image: "images/img_4.jpg"
+      },
+      {
+        date: "21st January 2023",
+        title: "A Return To Da Lat",
+        description: "It felt so poetic and right to be back. The time was approaching when I'd return to the UK to start working for Paul. I'd think about how we'd been to Da Lat at the beginning of our relationship, so fresh and me so clumsy (I never did stop being clumsy). And there we were again. What felt like a small lifetime later, the sapling of our bond blossomed and we had such a pleasant time with your family.",
+        image: "images/img_5.jpg"
+      },
+      {
+        date: "26th January 2023",
+        title: "Bali",
+        description: "This was our worst holiday for sure. I had a wonderful time because I was there with you. But in the grand scheme of things it was not that cool. Expensive, barely any culture, extremely superficial and a tourist population seemingly consising of exclusively our least favourite people ever. I remember most saying goodbye to you at the airport. How you pressed your face into my chest before you left to board your flight. And how I felt so empty and so broken.",
+        image: "images/img_6.jpg"
+      },
+      {
+        date: "29th May 2023",
+        title: "Our First Yakiniku King",
+        description: "I don't quite remember why but we had my main birthday meal 5 days early. I remember you offering me some choices and I chose yakiniku. We ate so much. The cheeseball sundae blew both our minds and it was the beginning of an addiction to grilled meats that would mark our relationship.",
+        image: "images/img_7.jpg"
+      },
+      {
+        date: "22nd July 2023",
+        title: "You First Met My Friend",
+        description: "It was the first time you'd met a friend of mine. Thanks to you we'd come to Osaka and visited the castle. I felt like a little kid. Taking two of my best friends around, goofing around and laughing together. You and Ali had started to make friends and we were having a really nice day despite the heat.",
+        image: "images/img_8.jpg"
+      },
+      {
+        date: "10th August 2023",
+        title: "The Planetarium",
+        description: "We'd tried to go for a walk but the trail was impossible to find. We'd wandered to a bus stop which had taken us to this planetarium. We discovered that we were both about 15kg heavier than we thought we should be. Dressed as mandarins we wandered around, I loved your reaction to the 4d ride. You let me experience things like it was my first time, I'm really grateful for that.",
+        image: "images/img_9.jpg"
+      },
+      {
+        date: "3rd September 2023",
+        title: "Pottery 'Class'",
+        description: "We'd tried our hand at pottery. I was a lost cause but you were so talented. I was so impressed at how good at it you were. One of many times that I've admired one of the many things that I admire about you.",
+        image: "images/img_10.jpg"
+      },
+      {
+        date: "7th October 2023",
+        title: "We Met Abby And Chino",
+        description: "I'd heard you talk about Abby before but this was my first time meeting her and chino. It was the first and really the only time we've ever been on anything that resembled a double date. I remember feeling quite shy but appreciating you in a very different way as I appreciated the ubiquity of love alongside the its singularity.",
+        image: "images/img_11.jpg"
+      },
+      {
+        date: "14th October 2023",
+        title: "Our First B-Squared",
+        description: "The food was excellent. What made it excellent was being there and eating it with you. I watched your reaction to each dish and before I'd tasted a single bite it was my favourite cafe in Tokyo.",
+        image: "images/img_12.jpg"
+      },
+      {
+        date: "14th October 2023 (Again)",
+        title: "5 Steps Away From That ^",
+        description: "This is one of my favourite pictures so I had to include it. More eating, more time spent with you in the autumn sun. You make each experience more intense and the highs are ever so much higher for your laughter and your smile.",
+        image: "images/img_13.jpg"
+      },
+      {
+        date: "15th October 2023",
+        title: "Another Favourite Photo",
+        description: "Admittedly there's little to say about this one other than it's another of my favourite photographs. We'd walk around Sengawa after I'd proved completely hopeless on a bike. Soaking in the evening sun, getting my mind off a day of recruitment talking to people and stressing about making deals.",
+        image: "images/img_14.jpg"
+      },
+      {
+        date: "28th October 2023",
+        title: "A Brief Detour On The Way To The Museum",
+        description: "Your sister was staying with us. I'd thought she might like to see the science museum so we took her. On the way we'd stopped at a food market we saw in Odaiba. These tacos were fantastic. I remember watching you take these big bites while em Bong watched on. At times I feel that you are the only thing I know. And because of that I can forget how unique you are. Moments like these, seeing you against the backdrop of someone else let me appreciate magic of you, and your light among the constellations of others.",
+        image: "images/img_15.jpg"
+      },
+      {
+        date: "6th November 2023",
+        title: "A Photo To Make Me Cry",
+        description: "You were making cards. Drawing them on paper, I was finishing work for the evening. I'd glanced over at you and seen you through the gap in the door. Seeing you like that, in your own world, knowing I was soon to leave Japan I felt such a profound sinking in my chest. I felt so compelled to take a picture and so took this with a distinct feeling that one day I'd look at it and weep. I remember joking/looking for validation that one day you'd break up with me and I'd look at this picture and it would crush me and you'd told me I was being nonsense. That was something neither of us could ever imagine happening. A lot has happened since then but I still look at the woman through that door and feel the same heaviness and shed the same tear.",
+        image: "images/img_16.jpg"
+      },
+      {
+        date: "1st January 2024",
+        title: "York",
+        description: "We wandered around York with Ali. I think it was the most excited I've ever seen you to see Ali. We had a really lovely time with him and you got to experience your first afternoon tea. You were not impressed.",
+        image: "images/img_17.jpg"
+      },
+      {
+        date: "2nd January 2024",
+        title: "Bath",
+        description: "I took you around my University City. You thought it was so beautiful. It's an immense shame that the weather was so bad. Since I took you around on that trip I've hoped that one day We'd spend time in the UK in the summer so we could do things in the sun. I'm still praying I get that chance, undeserving as I may be.",
+        image: "images/img_18.jpg"
+      },
+      {
+        date: "5th January 2024",
+        title: "Our Favourite City",
+        description: "Since the very beginning of our relationship you'd talked about how much you wanted to go to Edinburgh so when you were coming to the UK I knew I had to take you. I was amazed at how much I liked the city myself honestly. As we walked I'd daydream about living there and mooching around the city visiting cafes with you on a Sunday morning if we were to live there together. I still fantasise about it now.",
+        image: "images/img_19.jpg"
+      },
+      {
+        date: "11th January 2024",
+        title: "London",
+        description: "Your first time in London. I tried to take you around the key sites. You got ill. I felt terrible about it. Despite the bad weather I loved wandering around with you. I'd never liked London as a city until I went there with you. Suddenly I could see myself living there and enjoying it as we ate our way through markets and I saw your jaw drop at the Monet in the Tate. Remember when your thesis was going to be on modern art?",
+        image: "images/img_20.jpg"
+      },
+      {
+        date: "22nd June 2024",
+        title: "Reunited",
+        description: "2 breakups later and we were togehter in Japan. I put you through a hellish time and I regret what I made you experience so much. It was a tumultuous time. We fought, I was rejected from jobs, you moved apartment. Spending time with Toay and Thuc Anh was nice. We made a video answering our questions when I left Japan and I talked about how nice it was to spend time with friends together and experience time with you having fun as friends, how unique it was and special it felt.",
+        image: "images/img_21.jpg"
+      },
+      {
+        date: "29th July 2024",
+        title: "The Night You Left For Vietnam",
+        description: "You left to go to Vietnam. Just me a Sesame at home together. The apartment felt so sad without you. I was preparing for interviews and trying to work on projects. You came home to an apartment that was not as clean as it should have been. I realised that there were many things I needed to learn and ways in which I needed to grow in order to actually be a good long term partner.",
+        image: "images/img_22.jpg"
+      },
+      {
+        date: "16th February 2025",
+        title: "The Road Trip",
+        description: "It had been months since we'd last seen eachother. I'd come to Japan with Ali. We'd finally gone on a road trip. I had a really spectacular time although we were definitely very rushed. Spending time together all of us felt so special. I slept so well on the futon and thought we should have a tatami room in our future house as our bedroom.",
+        image: "images/img_23.jpg"
+      },
+      {
+        date: "23rd June 2025",
+        title: "Kuala Lumpur",
+        description: "I'd talked about the country since we'd met. KL was my Edinburgh, and I'd finally taken you. It was a relief to see how much you liked the place honestly. It was a gift to be able to visit the Islamic museums with you and have you engaged and interested in the history of it. I was able to share a deeply beloved part of myself with you. It was your mum's first time outside of Vietnam and it felt so special to see her experience of the place.",
+        image: "images/img_24.jpg"
+      },
+      {
+        date: "27th June 2025",
+        title: "Penang",
+        description: "I booked way too long here. I apologise. That being said, this restaurant was fantastic. The laksa was easily the best I've tried and feeding you bites of everything knowing that it was delicious felt like a gift.",
+        image: "images/img_25.jpg"
+      },
+      {
+        date: "1st July 2025",
+        title: "Our Favourite Restaurant?",
+        description: "Our return to Pizza 4Ps. I loved the experience of feeling boujee with you. Reliving an experience from so early in our relationship and remembering how we were.",
+        image: "images/img_26.jpg"
+      },
+      {
+        date: "11th October 2025",
+        title: "Venice",
+        description: "I'd helped you move. You were finally in Italy after so many months of uncertainty and difficulty. Spending the day in Venice felt so surreal. I'd never imagined myself there, and had heard so much about the place that it scarcely felt real. You also had the same feeling and for a while I just marvelled at how far we'd come from that one late night in Hanoi.",
+        image: "images/img_27.jpg"
+      },
+      {
+        date: "11th December 2025",
+        title: "When in Rome",
+        description: "The feeling of being in Rome was very similar. I'm sorry for getting ill again :( in a way it's lucky that the embassy was in Rome because it was the perfect excuse for us to go. It was such an amazing city and I left so eager and excited to go back with you. If it happens, no part of me shall not be aware of how lucky I am to be there again wit you.",
+        image: "images/img_28.jpg"
+      },
+      {
+        date: "12 December 2025",
+        title: "You Look So Beautiful",
+        description: "You just looked stunning. That's it.",
+        image: "images/img_29.jpg"
+      },
+      {
+        date: "19th February 2026",
+        title: "Finally Seeing My Apartment",
+        description: "You finally got to visit my apartment after over a year of me living there. And you finally got to be genuinely surprised by real flowers. Fasting was difficult but it was still lovely to have you there.",
+        image: "images/img_30.jpg"
+      },
+      {
+        date: "5th April 2026",
+        title: "My Flower",
+        description: "Under the glow of the petals you blushed, and behind my beard and face red from running, I blushed too. This moment stands out to me in a strange sort of way. I could wax poetic but simply - I often find myself caught up in worries about the future and stresses about the practicality of the now. Stopping to smell the flowers and appreciate the little things is something I find myself doing less and less and one of many things that I miss about who I used to be. I appreciate that you remind of it.",
+        image: "images/img_31.jpg"
+      }
+    ];
+
+    const timeline = document.getElementById("timeline");
+
+    timelineItems.forEach((item, index) => {
+      const article = document.createElement("article");
+      article.className = "timeline-item";
+      article.style.animationDelay = `${Math.min(index * 0.045, 1.2)}s`;
+
+      article.innerHTML = `
+        <div class="timeline-card">
+          <div class="timeline-img-wrap">
+            <img
+              class="timeline-img"
+              src="${item.image}"
+              alt="${item.title}"
+              loading="lazy"
+            />
+            <span class="date-pill">♡ ${item.date}</span>
+          </div>
+
+          <div class="timeline-content">
+            <h2>${item.title}</h2>
+            <p>${item.description}</p>
+          </div>
+        </div>
+
+        <div class="timeline-dot" aria-hidden="true"></div>
+      `;
+
+      timeline.appendChild(article);
+    });
+
+    /*
+      Colour-shifting pastel background while scrolling.
+      This changes the soft glow layer based on scroll position.
+    */
+
+    const scrollGlow = document.getElementById("scrollGlow");
+
+    function updateScrollGlow() {
+      const scrollTop = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
+
+      const hueOne = 325 + progress * 95;
+      const hueTwo = 260 + progress * 130;
+      const hueThree = 185 + progress * 95;
+
+      scrollGlow.style.background = `
+        radial-gradient(circle at 50% ${20 + progress * 35}%,
+          hsla(${hueOne}, 95%, 84%, 0.48),
+          transparent 32%
+        ),
+        radial-gradient(circle at ${18 + progress * 64}% ${62 - progress * 22}%,
+          hsla(${hueTwo}, 95%, 86%, 0.36),
+          transparent 36%
+        ),
+        radial-gradient(circle at ${82 - progress * 58}% ${78 - progress * 28}%,
+          hsla(${hueThree}, 90%, 86%, 0.34),
+          transparent 34%
+        )
+      `;
+    }
+
+    updateScrollGlow();
+    window.addEventListener("scroll", updateScrollGlow, { passive: true });
+  </script>
 </body>
 </html>
-

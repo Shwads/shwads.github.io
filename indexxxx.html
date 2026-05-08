@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Her Royal Highness</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* SECTIONS */
+section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+}
+
+/* SKY */
+.sky {
+  background: linear-gradient(-45deg, #89CFF0, #dbeafe, #fdfbfb);
+  background-size: 400% 400%;
+  animation: skyMove 15s ease infinite;
+}
+
+@keyframes skyMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ITALY SCENE */
+.italy {
+  background: linear-gradient(to bottom, #c2e59c, #64b3f4);
+}
+
+/* FLIGHT */
+.flight {
+  background: linear-gradient(to bottom, #1e3c72, #2a5298);
+  color: white;
+}
+
+/* LONDON */
+.london {
+  background: linear-gradient(to bottom, #2c3e50, #4ca1af);
+  color: white;
+}
+
+/* FINAL */
+.final {
+  background: black;
+  color: white;
+}
+
+/* TEXT */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.cursive {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+}
+
+/* PLANE */
+.plane {
+  position: absolute;
+  font-size: 2rem;
+  transition: all 1s ease;
+}
+
+/* PATH LINE */
+.path {
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background: white;
+  top: 50%;
+  left: 10%;
+  transition: width 2s ease;
+}
+
+/* BUTTON */
+.btn {
+  padding: 12px 25px;
+  background: gold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+  transition: opacity 2s;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="overlay" id="overlay">
+  <h1 class="cursive">Welcome Princess Garlic of Darlington 👑</h1>
+  <p>We have long hoped for the arrival of British Bop</p>
+</div>
+
+<!-- SCENE 1 -->
+<section class="sky">
+  <h1>Welcome back to the UK 🇬🇧</h1>
+  <p id="typing"></p>
+</section>
+
+<!-- SCENE 2 ITALY -->
+<section class="italy">
+  <h2 data-aos="fade-up">From beautiful Padua 🇮🇹</h2>
+  <p data-aos="fade-up" data-aos-delay="200">
+    With your not so beautiful pork eating housemates
+  </p>
+</section>
+
+<!-- SCENE 3 FLIGHT -->
+<section class="flight">
+  <h2 data-aos="fade-up">Across the skies ✈️</h2>
+  <p data-aos="fade-up" data-aos-delay="200">
+    Tragically without good snackalicious options
+  </p>
+
+  <div class="path" id="path"></div>
+  <div class="plane" id="plane">✈️</div>
+</section>
+
+<!-- SCENE 4 LONDON -->
+<section class="london">
+  <h2 data-aos="fade-up">To gloomy Birmingham hm 🇬🇧</h2>
+  <p data-aos="fade-up" data-aos-delay="200">
+    Since you stepped off the plane it no longer feels so chilly.
+  </p>
+</section>
+
+<!-- SCENE 5 FINAL -->
+<section class="final">
+  <h1 class="cursive">Welcome back my sweetheart</h1>
+  <p>I pray I can make your stay joyous and comfortable and relaxing and fun.</p>
+  <button class="btn" onclick="finalSurprise()">If I may be so bold to make a request...</button>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+AOS.init();
+
+/* Typing */
+const text = "I've been excited for this since the moment you left.";
+let i = 0;
+
+function type() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 40);
+  }
+}
+type();
+
+/* Overlay fade */
+setTimeout(() => {
+  document.getElementById("overlay").classList.add("hidden");
+}, 2500);
+
+/* Scroll animation */
+window.addEventListener("scroll", () => {
+  let scroll = window.scrollY;
+  let plane = document.getElementById("plane");
+  let path = document.getElementById("path");
+
+  if (scroll > window.innerHeight * 1.5) {
+    plane.style.left = "70%";
+    plane.style.top = "40%";
+    path.style.width = "60%";
+  }
+});
+
+/* Final surprise */
+function finalSurprise() {
+  alert("May I please choose your outfits in the coming nights? 🥺");
+}
+</script>
+
+</body>
+</html>
+
